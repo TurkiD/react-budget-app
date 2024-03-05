@@ -86,7 +86,7 @@ function IncomeForm() {
             required
           />
         </div>
-        <button type="submit">Add Income</button>
+        <button>Add Income</button>
       </form>
 
       {/* list array of items */}
