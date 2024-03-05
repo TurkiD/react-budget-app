@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.css";
+import { Flex, Text, Button } from "@radix-ui/themes";
 
 function TransferForm() {
   return (
-    <div className="transfer-form">
+    <div className="card">
       <p>Current balance: 0</p>
       <form action="">
         <div className="form-field">

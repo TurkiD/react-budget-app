@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
+import { Flex, Text, Button } from "@radix-ui/themes";
 
 function TargetForm() {
   return (
@@ -11,10 +12,11 @@ function TargetForm() {
           <button type="submit">Reset</button>
         </div>
       </form>
+
       <p>Target: 4000</p>
       <p>Current saving: 1000</p>
       <p>
-        <progress max={5000} value={1000}/>
+        <progress max={5000} value={1000} />
       </p>
     </div>
   );
