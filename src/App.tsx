@@ -8,23 +8,26 @@ import "./index.css";
 import { useState } from "react";
 
 export default function MyApp() {
-  // State lifting here
   const [savingAmount, setSavingAmount] = useState(0);
+  const [totalIncomeAmount, setTotalIncomeAmount] = useState(0);
+
+  // State lifting here
   const getSavingAmount = (amount: number) => {
     setSavingAmount(amount);
   };
 
-  // const getTotalIncomeAmount = (totalAmount) => {
-
-  // }
+  const getTotalIncomeAmount = (amount: number) => {
+    setTotalIncomeAmount(amount);
+    console.log(totalIncomeAmount);
+  };
 
   return (
     <>
       <div className="container">
-        <IncomeForm />
+        <IncomeForm onGetTotalIncomeAmount={getTotalIncomeAmount} />
         <ExpenseForm />
         <TargetForSaving savingAmount={savingAmount} />
-        <TransferForSaving OnGetSavingAmount={getSavingAmount} />
+        <TransferForSaving OnGetSavingAmount={getSavingAmount} totalIncomeAmount={totalIncomeAmount}/>
       </div>
     </>
   );

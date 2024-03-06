@@ -10,7 +10,11 @@ type IncomeType = {
   date: string;
 };
 
-function IncomeForm() {
+type IncomeFormProps = {
+  onGetTotalIncomeAmount: (amount: number) => void;
+};
+
+function IncomeForm(props: IncomeFormProps) {
   const [income, setIncome] = useState({
     source: "",
     amount: 0,
@@ -21,7 +25,7 @@ function IncomeForm() {
   // reading input from user
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIncome((prevIncome) => {
-      return {...prevIncome, [event.target.name]: event.target.value}
+      return { ...prevIncome, [event.target.name]: event.target.value };
     });
   };
 
@@ -30,7 +34,8 @@ function IncomeForm() {
     (total, currentValue) => total + Number(currentValue.amount),
     0
   );
-  console.log(totalAmount);
+  // send total amount to App component
+  props.onGetTotalIncomeAmount(totalAmount);
 
   // handling submit
   const handleSubmit = (event: FormEvent) => {
@@ -40,7 +45,7 @@ function IncomeForm() {
     // adding ID to each income
     const newIncome = {
       id: uuidv4(),
-      ...income
+      ...income,
     };
 
     // assign incomes to an array
@@ -51,7 +56,7 @@ function IncomeForm() {
       source: "",
       amount: 0,
       date: "",
-    })
+    });
   };
 
   // rendering

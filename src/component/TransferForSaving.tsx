@@ -3,12 +3,13 @@ import { Flex, Text, Button } from "@radix-ui/themes";
 
 type AmountSavingProps = {
   OnGetSavingAmount: (amount: number) => void;
+  totalIncomeAmount: number
 };
 
 function TransferForSaving(props: AmountSavingProps) {
   const [amount, setAmount] = useState<number>(0);
 
-  const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setAmount(Number(value));
   };
@@ -21,7 +22,7 @@ function TransferForSaving(props: AmountSavingProps) {
 
   return (
     <div className="card">
-      <p>Current balance: 0</p>
+      <p>Current balance: {props.totalIncomeAmount}</p>
       <form onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="source">Transfer to saving account</label>
@@ -29,7 +30,7 @@ function TransferForSaving(props: AmountSavingProps) {
             type="number"
             name="amount"
             id="amount"
-            onChange={handleSourceChange}
+            onChange={handleChange}
             required
           />
           <button>Transfer</button>
