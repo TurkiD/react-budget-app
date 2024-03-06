@@ -4,50 +4,57 @@ import { Flex, Text, Button, Box } from "@radix-ui/themes";
 // import "./App.css";
 
 type IncomeType = {
-  id?: string,
-  source: string,
-  amount: number,
-  date: string
-}
+  id?: string;
+  source: string;
+  amount: number;
+  date: string;
+};
 
 function IncomeForm() {
-  const [source, setSource] = useState<string>("");
-  const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState<string>("");
+  const [income, setIncome] = useState({
+    source: "",
+    amount: 0,
+    date: "",
+  });
   const [incomes, setIncomes] = useState<IncomeType[]>([]);
 
-  const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setSource(value);
-  };
-  const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setAmount(Number(value));
-  };
-  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setDate(value);
+  // reading input from user
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIncome((prevIncome) => {
+      return {...prevIncome, [event.target.name]: event.target.value}
+    });
   };
 
+  // calculate the amount of incomes
+  const totalAmount = incomes.reduce(
+    (total, currentValue) => total + Number(currentValue.amount),
+    0
+  );
+  console.log(totalAmount);
+
+  // handling submit
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // after clicking the submit button
 
-    const income = {
+    // after clicking the submit button
+    // adding ID to each income
+    const newIncome = {
       id: uuidv4(),
-      source: source,
-      amount: amount,
-      date: date,
+      ...income
     };
 
-    setIncomes((prevIncomes) => [...prevIncomes, income]);
+    // assign incomes to an array
+    setIncomes((prevIncomes) => [...prevIncomes, newIncome]);
 
     // reset state
-    setSource("");
-    setAmount(0);
-    setSource("");
+    setIncome({
+      source: "",
+      amount: 0,
+      date: "",
+    })
   };
 
+  // rendering
   return (
     <div className="card">
       <form onSubmit={handleSubmit}>
@@ -58,8 +65,8 @@ function IncomeForm() {
             placeholder="Salary"
             name="source"
             id="source"
-            value={source}
-            onChange={handleSourceChange}
+            value={income.source}
+            onChange={handleChange}
             required
           />
         </div>
@@ -70,8 +77,8 @@ function IncomeForm() {
             placeholder=""
             name="amount"
             id="amount"
-            value={amount}
-            onChange={handleAmountChange}
+            value={income.amount}
+            onChange={handleChange}
             required
           />
         </div>
@@ -81,8 +88,8 @@ function IncomeForm() {
             type="date"
             name="date"
             id=""
-            value={date}
-            onChange={handleDateChange}
+            value={income.date}
+            onChange={handleChange}
             required
           />
         </div>
@@ -92,7 +99,11 @@ function IncomeForm() {
       {/* list array of items */}
       <ul>
         {incomes.map((income) => {
-          return <li key={income.id}>{income.source}: {income.amount} EUR on {income.date}</li>;
+          return (
+            <li key={income.id}>
+              {income.source}: {income.amount} EUR on {income.date}
+            </li>
+          );
         })}
       </ul>
     </div>

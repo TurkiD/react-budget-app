@@ -11,43 +11,42 @@ type IncomeType = {
 };
 
 function ExpenseForm() {
-  const [source, setSource] = useState<string>("");
-  const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState<string>("");
+  const [expense, setExpense] = useState({
+    source: "",
+    amount: 0,
+    date: "",
+  });
   const [expenses, setExpenses] = useState<IncomeType[]>([]);
 
-  const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setSource(value);
-  };
-  const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setAmount(Number(value));
-  };
-  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setDate(value);
+  // read input from user
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setExpense((prevExpense) => {
+      return { ...prevExpense, [event.target.name]: event.target.value };
+    });
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     // after clicking the submit button
 
-    const expense = {
+    // adding ID for each expense
+    const newExpense = {
       id: uuidv4(),
-      source: source,
-      amount: amount,
-      date: date,
+      ...expense,
     };
 
-    setExpenses((prevExpenses) => [...prevExpenses, expense]);
+    // assign expense to an array
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
 
     // reset state
-    setSource("");
-    setAmount(0);
-    setSource("");
+    setExpense({
+      source: "",
+      amount: 0,
+      date: "",
+    });
   };
 
+  // rendering
   return (
     <div className="card">
       <form onSubmit={handleSubmit}>
@@ -58,19 +57,19 @@ function ExpenseForm() {
             placeholder="Bill"
             name="source"
             id="source"
-            value={source}
-            onChange={handleSourceChange}
+            value={expense.source}
+            onChange={handleChange}
             required
           />
         </div>
         <div className="form-field">
-          <label htmlFor="expense">Amount of expense</label>
+          <label htmlFor="amount">Amount of expense</label>
           <input
-            type="text"
-            name="expense"
-            id="expense"
-            value={amount}
-            onChange={handleAmountChange}
+            type="number"
+            name="amount"
+            id="amount"
+            value={expense.amount}
+            onChange={handleChange}
             required
           />
         </div>
@@ -80,18 +79,22 @@ function ExpenseForm() {
             type="date"
             name="date"
             id="date"
-            value={date}
-            onChange={handleDateChange}
+            value={expense.date}
+            onChange={handleChange}
             required
           />
         </div>
         <button>Add Expense</button>
       </form>
 
-            {/* list array of items */}
-            <ul>
+      {/* list array of items */}
+      <ul>
         {expenses.map((expense) => {
-          return <li key={expense.id}>{expense.source}: {expense.amount} EUR on {expense.date}</li>;
+          return (
+            <li key={expense.id}>
+              {expense.source}: {expense.amount} EUR on {expense.date}
+            </li>
+          );
         })}
       </ul>
     </div>

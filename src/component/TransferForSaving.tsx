@@ -1,7 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Flex, Text, Button } from "@radix-ui/themes";
 
-function TransferForSaving() {
+type AmountSavingProps = {
+  OnGetSavingAmount: (amount: number) => void;
+};
+
+function TransferForSaving(props: AmountSavingProps) {
   const [amount, setAmount] = useState<number>(0);
 
   const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -12,8 +16,8 @@ function TransferForSaving() {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    console.log(amount);
-  }
+    props.OnGetSavingAmount(Number(amount));
+  };
 
   return (
     <div className="card">

@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 // import "./App.css";
 import { Flex, Text, Button } from "@radix-ui/themes";
 
-function TargetForSaving() {
+function TargetForSaving(props: { savingAmount: number }) {
   const [amount, setAmount] = useState<number>(0);
 
   const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,8 @@ function TargetForSaving() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(amount);
+    
+
   };
 
   return (
@@ -27,12 +28,12 @@ function TargetForSaving() {
             onChange={handleSourceChange}
             required
           />
-          <button>Reset</button>
         </div>
+        <button>Reset</button>
       </form>
 
-      <p>Target: 4000</p>
-      <p>Current saving: 1000</p>
+      <p>Target: {amount}</p>
+      <p>Current saving: {props.savingAmount}</p>
       <p>
         <progress max={5000} value={1000} />
       </p>
