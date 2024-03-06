@@ -31,7 +31,7 @@ export default function MyApp() {
         <IncomeForm onGetTotalIncomeAmount={getTotalIncomeAmount} />
         <ExpenseForm onGetTotalExpenseAmount={getTotalExpenseAmount}/>
         <TargetForSaving savingAmount={savingAmount} />
-        <TransferForSaving OnGetSavingAmount={getSavingAmount} totalIncomeAmount={totalIncomeAmount}/>
+        <TransferForSaving OnGetSavingAmount={getSavingAmount} totalIncomeAmount={totalIncomeAmount} totalExpenseAmount={totalExpenseAmount}/>
       </div>
     </>
   );

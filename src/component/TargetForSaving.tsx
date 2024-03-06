@@ -13,7 +13,6 @@ function TargetForSaving(props: { savingAmount: number }) {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     
-
   };
 
   return (

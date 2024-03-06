@@ -3,7 +3,8 @@ import { Flex, Text, Button } from "@radix-ui/themes";
 
 type AmountSavingProps = {
   OnGetSavingAmount: (amount: number) => void;
-  totalIncomeAmount: number
+  totalIncomeAmount: number;
+  totalExpenseAmount: number;
 };
 
 function TransferForSaving(props: AmountSavingProps) {
@@ -22,7 +23,7 @@ function TransferForSaving(props: AmountSavingProps) {
 
   return (
     <div className="card">
-      <p>Current balance: {props.totalIncomeAmount}</p>
+      <p>Current balance: {props.totalIncomeAmount - props.totalExpenseAmount}</p>
       <form onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="source">Transfer to saving account</label>
