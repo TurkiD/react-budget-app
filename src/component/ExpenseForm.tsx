@@ -3,20 +3,33 @@ import { v4 as uuidv4 } from "uuid";
 // import "./App.css";
 import { Flex, Text, Button, Box } from "@radix-ui/themes";
 
-type IncomeType = {
+type ExpenseType = {
   id?: string;
   source: string;
   amount: number;
   date: string;
 };
 
-function ExpenseForm() {
+type ExpenseFormProps = {
+  onGetTotalExpenseAmount: (amount: number) => void
+}
+
+
+function ExpenseForm(props: ExpenseFormProps) {
   const [expense, setExpense] = useState({
     source: "",
     amount: 0,
     date: "",
   });
-  const [expenses, setExpenses] = useState<IncomeType[]>([]);
+  const [expenses, setExpenses] = useState<ExpenseType[]>([]);
+
+  // calculate the amount of incomes
+  const totalAmount = expenses.reduce(
+    (total, currentValue) => total + Number(currentValue.amount),
+    0
+  );
+  // send total amount to App component
+  props.onGetTotalExpenseAmount(totalAmount);
 
   // read input from user
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
