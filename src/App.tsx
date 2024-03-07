@@ -9,6 +9,7 @@ import { useState } from "react";
 
 export default function MyApp() {
   const [savingAmount, setSavingAmount] = useState(0);
+  const [saving, setSaving] = useState(0);
   const [totalIncomeAmount, setTotalIncomeAmount] = useState(0);
   const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
 
@@ -17,21 +18,33 @@ export default function MyApp() {
     setSavingAmount(amount);
   };
 
+  const getTotalSaving = (amount: number) => {
+    setSaving(amount);
+  };
+
   const getTotalIncomeAmount = (amount: number) => {
     setTotalIncomeAmount(amount);
   };
 
   const getTotalExpenseAmount = (amount: number) => {
     setTotalExpenseAmount(amount);
-  }
+  };
 
   return (
     <>
       <div className="container">
         <IncomeForm onGetTotalIncomeAmount={getTotalIncomeAmount} />
-        <ExpenseForm onGetTotalExpenseAmount={getTotalExpenseAmount}/>
-        <TargetForSaving savingAmount={savingAmount} />
-        <TransferForSaving OnGetSavingAmount={getSavingAmount} totalIncomeAmount={totalIncomeAmount} totalExpenseAmount={totalExpenseAmount}/>
+        <ExpenseForm onGetTotalExpenseAmount={getTotalExpenseAmount} />
+        <TargetForSaving
+          OnGetTotalSaving={getTotalSaving}
+          savingAmount={savingAmount}
+        />
+        <TransferForSaving
+          OnGetSavingAmount={getSavingAmount}
+          totalIncomeAmount={totalIncomeAmount}
+          totalExpenseAmount={totalExpenseAmount}
+          saving={saving}
+        />
       </div>
     </>
   );
