@@ -40,7 +40,8 @@ function TargetForSaving(props: SavingProps) {
       <p>Target: {amount}</p>
       <p>Current saving: {props.savingAmount}</p>
       <p>
-        <progress max={5000} value={1000} />
+        Progress: {(props.savingAmount / amount) * 100}%
+        <progress max={amount} value={props.savingAmount} />
       </p>
     </div>
   );
