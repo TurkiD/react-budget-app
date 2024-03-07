@@ -59,6 +59,11 @@ function IncomeForm(props: IncomeFormProps) {
     });
   };
 
+  const handleIncomeDelete = (id: string | undefined) => {
+    const filterdIncome = incomes.filter((income) => income.id !== id);
+    setIncomes(filterdIncome);
+  } 
+
   // rendering
   return (
     <div className="card">
@@ -110,7 +115,7 @@ function IncomeForm(props: IncomeFormProps) {
             return (
               <li key={income.id}>
                 {income.source}: {income.amount} EUR on {income.date}
-                <button className="btn">Delete</button>
+                <button onClick={() => handleIncomeDelete(income.id)} className="btn">Delete</button>
               </li>
             );
           })}
