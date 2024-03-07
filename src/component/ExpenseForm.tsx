@@ -15,6 +15,7 @@ type ExpenseFormProps = {
 };
 
 function ExpenseForm(props: ExpenseFormProps) {
+  // use state
   const [expense, setExpense] = useState({
     source: "",
     amount: 0,
@@ -56,6 +57,11 @@ function ExpenseForm(props: ExpenseFormProps) {
       amount: 0,
       date: "",
     });
+  };
+
+  const handleExpenseDelete = (id: string | undefined) => {
+    const filteredExpense = expenses.filter((expense) => expense.id !== id);
+    setExpenses(filteredExpense);
   };
 
   // rendering
@@ -106,7 +112,9 @@ function ExpenseForm(props: ExpenseFormProps) {
             return (
               <li key={expense.id}>
                 {expense.source}: {expense.amount} EUR on {expense.date}
-                <button className="btn">Delete</button>
+                <button onClick={() => handleExpenseDelete (expense.id)} className="btn">
+                  Delete
+                </button>
               </li>
             );
           })}
