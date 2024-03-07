@@ -32,8 +32,9 @@ function TransferForSaving(props: AmountSavingProps) {
       </p>
       <form onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="source">Transfer to saving account</label>
+          <label htmlFor="source">Transfer to saving account:</label>
           <input
+            className="input-field"
             type="number"
             name="amount"
             id="amount"
@@ -41,8 +42,8 @@ function TransferForSaving(props: AmountSavingProps) {
             onChange={handleChange}
             required
           />
-          <button>Transfer</button>
         </div>
+        <button>Transfer</button>
       </form>
     </div>
   );

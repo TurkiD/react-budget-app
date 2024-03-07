@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 // import "./App.css";
-import { Flex, Text, Button, Box } from "@radix-ui/themes";
+import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
 
 type ExpenseType = {
   id?: string;
@@ -11,9 +11,8 @@ type ExpenseType = {
 };
 
 type ExpenseFormProps = {
-  onGetTotalExpenseAmount: (amount: number) => void
-}
-
+  onGetTotalExpenseAmount: (amount: number) => void;
+};
 
 function ExpenseForm(props: ExpenseFormProps) {
   const [expense, setExpense] = useState({
@@ -64,7 +63,7 @@ function ExpenseForm(props: ExpenseFormProps) {
     <div className="card">
       <form onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="source">Expense source</label>
+          <label htmlFor="source">Expense source:</label>
           <input
             type="text"
             placeholder="Bill"
@@ -76,7 +75,7 @@ function ExpenseForm(props: ExpenseFormProps) {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="amount">Amount of expense</label>
+          <label htmlFor="amount">Amount of expense:</label>
           <input
             type="number"
             name="amount"
@@ -87,7 +86,7 @@ function ExpenseForm(props: ExpenseFormProps) {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="date">Date of expense</label>
+          <label htmlFor="date">Date of expense:</label>
           <input
             type="date"
             name="date"
@@ -101,15 +100,18 @@ function ExpenseForm(props: ExpenseFormProps) {
       </form>
 
       {/* list array of items */}
-      <ul>
-        {expenses.map((expense) => {
-          return (
-            <li key={expense.id}>
-              {expense.source}: {expense.amount} EUR on {expense.date}
-            </li>
-          );
-        })}
-      </ul>
+      <ScrollArea type="always" scrollbars="vertical" style={{ height: 180 }}>
+        <ul>
+          {expenses.map((expense) => {
+            return (
+              <li key={expense.id}>
+                {expense.source}: {expense.amount} EUR on {expense.date}
+                <button className="btn">Delete</button>
+              </li>
+            );
+          })}
+        </ul>
+      </ScrollArea>
     </div>
   );
 }

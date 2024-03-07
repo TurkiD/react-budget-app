@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Flex, Text, Button, Box } from "@radix-ui/themes";
+import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
 // import "./App.css";
 
 type IncomeType = {
@@ -64,8 +64,9 @@ function IncomeForm(props: IncomeFormProps) {
     <div className="card">
       <form onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="source">Income source</label>
+          <label htmlFor="source">Income source:</label>
           <input
+            className="input-field"
             type="text"
             placeholder="Salary"
             name="source"
@@ -76,8 +77,9 @@ function IncomeForm(props: IncomeFormProps) {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="amount">Amount of income</label>
+          <label htmlFor="amount">Amount of income:</label>
           <input
+            className="input-field"
             type="number"
             placeholder=""
             name="amount"
@@ -88,7 +90,7 @@ function IncomeForm(props: IncomeFormProps) {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="date">Date of income</label>
+          <label htmlFor="date">Date of income:</label>
           <input
             type="date"
             name="date"
@@ -102,15 +104,18 @@ function IncomeForm(props: IncomeFormProps) {
       </form>
 
       {/* list array of items */}
-      <ul>
-        {incomes.map((income) => {
-          return (
-            <li key={income.id}>
-              {income.source}: {income.amount} EUR on {income.date}
-            </li>
-          );
-        })}
-      </ul>
+      <ScrollArea type="always" scrollbars="vertical" style={{ height: 180 }}>
+        <ul>
+          {incomes.map((income) => {
+            return (
+              <li key={income.id}>
+                {income.source}: {income.amount} EUR on {income.date}
+                <button className="btn">Delete</button>
+              </li>
+            );
+          })}
+        </ul>
+      </ScrollArea>
     </div>
   );
 }

@@ -25,7 +25,7 @@ function TargetForSaving(props: SavingProps) {
     <div className="card">
       <form onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="source">Set target</label>
+          <label htmlFor="source">Set target:</label>
           <input
             type="text"
             name="source"

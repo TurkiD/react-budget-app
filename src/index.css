@@ -1,6 +1,22 @@
+li {
+  margin: 2% 0%;
+}
+
+input {
+  display: block;
+}
+
+.btn {
+  margin-left: 1%;
+}
+
 .container {
   margin: 2% 6%;
   display: grid;
 
   grid-template-columns: 33.3% 33.3% 33.3%;
+}
+
+.form-field {
+  margin: 2% 0%;
 }
