@@ -29,7 +29,6 @@ function TargetForSaving(props: SavingProps) {
           <input
             type="text"
             name="source"
-            id="source"
             onChange={handleSourceChange}
             required
           />

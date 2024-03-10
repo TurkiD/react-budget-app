@@ -74,7 +74,6 @@ function ExpenseForm(props: ExpenseFormProps) {
             type="text"
             placeholder="Bill"
             name="source"
-            id="source"
             value={expense.source}
             onChange={handleChange}
             required
@@ -85,7 +84,6 @@ function ExpenseForm(props: ExpenseFormProps) {
           <input
             type="number"
             name="amount"
-            id="amount"
             value={expense.amount}
             onChange={handleChange}
             required
@@ -96,7 +94,6 @@ function ExpenseForm(props: ExpenseFormProps) {
           <input
             type="date"
             name="date"
-            id="date"
             value={expense.date}
             onChange={handleChange}
             required

@@ -75,7 +75,6 @@ function IncomeForm(props: IncomeFormProps) {
             type="text"
             placeholder="Salary"
             name="source"
-            id="source"
             value={income.source}
             onChange={handleChange}
             required
@@ -88,7 +87,6 @@ function IncomeForm(props: IncomeFormProps) {
             type="number"
             placeholder=""
             name="amount"
-            id="amount"
             value={income.amount}
             onChange={handleChange}
             required
@@ -99,7 +97,6 @@ function IncomeForm(props: IncomeFormProps) {
           <input
             type="date"
             name="date"
-            id=""
             value={income.date}
             onChange={handleChange}
             required

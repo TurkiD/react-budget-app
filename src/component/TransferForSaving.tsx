@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Flex, Text, Button } from "@radix-ui/themes";
 
 type AmountSavingProps = {
-  OnGetSavingAmount: (amount: number) => void;
+  OnSetSavingAmount: (amount: number) => void;
   totalIncomeAmount: number;
   totalExpenseAmount: number;
   saving: number;
@@ -10,7 +10,6 @@ type AmountSavingProps = {
 
 function TransferForSaving(props: AmountSavingProps) {
   const [amount, setAmount] = useState<number>(0);
-  // setBalance(props.totalIncomeAmount - props.totalExpenseAmount);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -20,7 +19,7 @@ function TransferForSaving(props: AmountSavingProps) {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    props.OnGetSavingAmount(Number(amount));
+    props.OnSetSavingAmount(Number(amount));
     setAmount(0);
   };
 
@@ -37,7 +36,6 @@ function TransferForSaving(props: AmountSavingProps) {
             className="input-field"
             type="number"
             name="amount"
-            id="amount"
             value={amount}
             onChange={handleChange}
             required

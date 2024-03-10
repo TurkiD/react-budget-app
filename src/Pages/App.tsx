@@ -1,13 +1,15 @@
+import IncomeForm from "../component/IncomeForm";
+import ExpenseForm from "../component/ExpenseForm";
+import TargetForSaving from "../component/TargetForSaving";
+import TransferForSaving from "../component/TransferForSaving";
+
 import { Flex, Text, Button } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import IncomeForm from "./component/IncomeForm";
-import ExpenseForm from "./component/ExpenseForm";
-import TargetForSaving from "./component/TargetForSaving";
-import TransferForSaving from "./component/TransferForSaving";
-import "./index.css";
+import "/src/index.css";
+
 import { useState } from "react";
 
-export default function MyApp() {
+export default function App() {
   const [savingAmount, setSavingAmount] = useState(0);
   const [saving, setSaving] = useState(0);
   const [totalIncomeAmount, setTotalIncomeAmount] = useState(0);
@@ -40,7 +42,7 @@ export default function MyApp() {
           savingAmount={savingAmount}
         />
         <TransferForSaving
-          OnGetSavingAmount={getSavingAmount}
+          OnSetSavingAmount={getSavingAmount}
           totalIncomeAmount={totalIncomeAmount}
           totalExpenseAmount={totalExpenseAmount}
           saving={saving}
