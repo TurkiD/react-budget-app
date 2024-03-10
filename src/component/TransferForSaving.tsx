@@ -41,7 +41,7 @@ function TransferForSaving(props: AmountSavingProps) {
             required
           />
         </div>
-        <button>Transfer</button>
+        <button className="btn">Transfer</button>
       </form>
     </div>
   );

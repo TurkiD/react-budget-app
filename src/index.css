@@ -1,3 +1,10 @@
+body {
+  background-color: #393e46;
+}
+label,
+p {
+  color: #eeeeee;
+}
 li {
   margin: 2% 0%;
 }
@@ -28,17 +35,42 @@ input {
   background-color: lightslategray;
 }
 
-.btn {
-  margin-left: 1%;
-}
-
 .container {
-  margin: 2% 6%;
+  margin: 3% 0%;
   display: grid;
 
-  grid-template-columns: 33.3% 33.3% 33.3%;
+  /* grid-template-columns: 33.3% 33.3% 33.3%; */
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.form-field {
-  margin: 2% 0%;
+.card {
+  display: grid;
+  justify-content: center;
+}
+
+.btn {
+  background: #00adb5;
+  background-image: -webkit-linear-gradient(top, #00adb5, #eeeeee);
+  background-image: -moz-linear-gradient(top, #00adb5, #393e46);
+  background-image: -ms-linear-gradient(top, #00adb5, #eeeeee);
+  background-image: -o-linear-gradient(top, #00adb5, #eeeeee);
+  background-image: linear-gradient(to bottom, #00adb5, #eeeeee);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #393e46;
+  font-size: 16px;
+  padding: 5px 67px 5px 67px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #00adb5;
+  background-image: -webkit-linear-gradient(top, #00adb5, #c9dfe0);
+  background-image: -moz-linear-gradient(top, #00adb5, #c9dfe0);
+  background-image: -ms-linear-gradient(top, #00adb5, #c9dfe0);
+  background-image: -o-linear-gradient(top, #00adb5, #c9dfe0);
+  background-image: linear-gradient(to bottom, #00adb5, #c9dfe0);
+  text-decoration: none;
 }

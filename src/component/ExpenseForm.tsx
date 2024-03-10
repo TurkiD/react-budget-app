@@ -102,7 +102,7 @@ function ExpenseForm(props: ExpenseFormProps) {
             required
           />
         </div>
-        <button>Add Expense</button>
+        <button className="btn">Add Expense</button>
       </form>
 
       {/* list array of items */}

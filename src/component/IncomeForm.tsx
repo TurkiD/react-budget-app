@@ -43,24 +43,24 @@ function IncomeForm(props: IncomeFormProps) {
   // handling submit
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    
+
     if (income.source && income.amount && income.date) {
-          // after clicking the submit button
-    // adding ID to each income
-    const newIncome = {
-      id: uuidv4(),
-      ...income,
-    };
+      // after clicking the submit button
+      // adding ID to each income
+      const newIncome = {
+        id: uuidv4(),
+        ...income,
+      };
 
-    // assign incomes to an array
-    setIncomes((prevIncomes) => [...prevIncomes, newIncome]);
+      // assign incomes to an array
+      setIncomes((prevIncomes) => [...prevIncomes, newIncome]);
 
-    // reset state
-    setIncome({
-      source: "",
-      amount: 0,
-      date: "",
-    });
+      // reset state
+      setIncome({
+        source: "",
+        amount: 0,
+        date: "",
+      });
     }
   };
 
@@ -107,25 +107,23 @@ function IncomeForm(props: IncomeFormProps) {
             required
           />
         </div>
-        <button>Add Income</button>
+        <button className="btn">Add Income</button>
       </form>
 
       {/* list array of items */}
       <ScrollArea type="always" scrollbars="vertical" style={{ height: 180 }}>
         <ul>
-          {incomes.length > 0 && incomes.map((income) => {
-            return (
-              <li key={income.id}>
-                {income.source}: {income.amount} EUR on {income.date}
-                <button
-                  onClick={() => handleIncomeDelete(income.id)}
-                  className="btn"
-                >
-                  Delete
-                </button>
-              </li>
-            );
-          })}
+          {incomes.length > 0 &&
+            incomes.map((income) => {
+              return (
+                <li key={income.id}>
+                  {income.source}: {income.amount} EUR on {income.date}
+                  <button onClick={() => handleIncomeDelete(income.id)}>
+                    Delete
+                  </button>
+                </li>
+              );
+            })}
         </ul>
       </ScrollArea>
     </div>

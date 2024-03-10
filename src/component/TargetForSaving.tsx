@@ -27,13 +27,14 @@ function TargetForSaving(props: SavingProps) {
         <div className="form-field">
           <label htmlFor="source">Set target:</label>
           <input
+            className="input-field"
             type="text"
             name="source"
             onChange={handleSourceChange}
             required
           />
         </div>
-        <button>Reset</button>
+        <button className="btn">Reset</button>
       </form>
 
       <p>Target: {amount}</p>
