@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 // import "./App.css";
 import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
@@ -28,8 +28,11 @@ function ExpenseForm(props: ExpenseFormProps) {
     (total, currentValue) => total + Number(currentValue.amount),
     0
   );
-  // send total amount to App component
-  props.onGetTotalExpenseAmount(totalAmount);
+
+  useEffect(() => {
+    // send total amount to App component
+    props.onGetTotalExpenseAmount(totalAmount);
+  }, [expenses, totalAmount, props]);
 
   // read input from user
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +112,10 @@ function ExpenseForm(props: ExpenseFormProps) {
             return (
               <li key={expense.id}>
                 {expense.source}: {expense.amount} EUR on {expense.date}
-                <button onClick={() => handleExpenseDelete (expense.id)} className="btn">
+                <button
+                  onClick={() => handleExpenseDelete(expense.id)}
+                  className="btn"
+                >
                   Delete
                 </button>
               </li>

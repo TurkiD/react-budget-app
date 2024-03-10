@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
 // import "./App.css";
@@ -34,14 +34,18 @@ function IncomeForm(props: IncomeFormProps) {
     (total, currentValue) => total + Number(currentValue.amount),
     0
   );
-  // send total amount to App component
-  props.onGetTotalIncomeAmount(totalAmount);
+
+  useEffect(() => {
+    // send total amount to App component
+    props.onGetTotalIncomeAmount(totalAmount);
+  }, [incomes, totalAmount, props]);
 
   // handling submit
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-
-    // after clicking the submit button
+    
+    if (income.source && income.amount && income.date) {
+          // after clicking the submit button
     // adding ID to each income
     const newIncome = {
       id: uuidv4(),
@@ -57,12 +61,13 @@ function IncomeForm(props: IncomeFormProps) {
       amount: 0,
       date: "",
     });
+    }
   };
 
   const handleIncomeDelete = (id: string | undefined) => {
     const filterdIncome = incomes.filter((income) => income.id !== id);
     setIncomes(filterdIncome);
-  } 
+  };
 
   // rendering
   return (
@@ -108,11 +113,16 @@ function IncomeForm(props: IncomeFormProps) {
       {/* list array of items */}
       <ScrollArea type="always" scrollbars="vertical" style={{ height: 180 }}>
         <ul>
-          {incomes.map((income) => {
+          {incomes.length > 0 && incomes.map((income) => {
             return (
               <li key={income.id}>
                 {income.source}: {income.amount} EUR on {income.date}
-                <button onClick={() => handleIncomeDelete(income.id)} className="btn">Delete</button>
+                <button
+                  onClick={() => handleIncomeDelete(income.id)}
+                  className="btn"
+                >
+                  Delete
+                </button>
               </li>
             );
           })}
