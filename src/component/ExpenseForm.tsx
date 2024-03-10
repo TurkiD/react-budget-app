@@ -114,7 +114,6 @@ function ExpenseForm(props: ExpenseFormProps) {
                 {expense.source}: {expense.amount} EUR on {expense.date}
                 <button
                   onClick={() => handleExpenseDelete(expense.id)}
-                  className="btn"
                 >
                   Delete
                 </button>
