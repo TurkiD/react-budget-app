@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 // import "./App.css";
 import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type ExpenseType = {
   id?: string;
@@ -14,7 +15,7 @@ type ExpenseFormProps = {
   onGetTotalExpenseAmount: (amount: number) => void;
 };
 
-function ExpenseForm(props: ExpenseFormProps) {
+const ExpenseForm = (props: ExpenseFormProps) => {
   // use state
   const [expense, setExpense] = useState({
     source: "",
@@ -29,6 +30,12 @@ function ExpenseForm(props: ExpenseFormProps) {
     0
   );
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ExpenseType>();
+
   useEffect(() => {
     // send total amount to App component
     props.onGetTotalExpenseAmount(totalAmount);
@@ -41,8 +48,8 @@ function ExpenseForm(props: ExpenseFormProps) {
     });
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const submittedData: SubmitHandler<ExpenseType> = (data) => {
+    // event.preventDefault();
     // after clicking the submit button
 
     // adding ID for each expense
@@ -70,37 +77,52 @@ function ExpenseForm(props: ExpenseFormProps) {
   // rendering
   return (
     <div className="card">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(submittedData)}>
         <div className="form-field">
           <label htmlFor="source">Expense source:</label>
           <input
             type="text"
             placeholder="Bill"
-            name="source"
+            {...register("source", {
+              required: "Expense source is required",
+              minLength: {
+                value: 2,
+                message: "Expense source should have at least 2 characters",
+              },
+            })}
             value={expense.source}
             onChange={handleChange}
-            required
           />
+          {errors.source && (
+            <span style={{ color: "red" }}> {errors.source.message}</span>
+          )}
         </div>
         <div className="form-field">
           <label htmlFor="amount">Amount of expense:</label>
           <input
+            className="input-field"
             type="number"
-            name="amount"
+            {...register("amount", {
+              min: { value: 0, message: "Expense can not be negative" },
+            })}
             value={expense.amount}
             onChange={handleChange}
-            required
           />
+          {errors.amount && (
+            <span style={{ color: "red" }}> {errors.amount.message}</span>
+          )}
         </div>
         <div className="form-field">
           <label htmlFor="date">Date of expense:</label>
           <input
             type="date"
-            name="date"
+            {...register("date", { required: "Date is required" })}
             value={expense.date}
             onChange={handleChange}
-            required
           />
+          {errors.date && (
+            <span style={{ color: "red" }}> {errors.date.message}</span>
+          )}
         </div>
         <button className="btn">Add Expense</button>
       </form>
@@ -112,9 +134,7 @@ function ExpenseForm(props: ExpenseFormProps) {
             return (
               <li key={expense.id}>
                 {expense.source}: {expense.amount} EUR on {expense.date}
-                <button
-                  onClick={() => handleExpenseDelete(expense.id)}
-                >
+                <button onClick={() => handleExpenseDelete(expense.id)}>
                   Delete
                 </button>
               </li>
@@ -124,6 +144,6 @@ function ExpenseForm(props: ExpenseFormProps) {
       </ScrollArea>
     </div>
   );
-}
+};
 
 export default ExpenseForm;
