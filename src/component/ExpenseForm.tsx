@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
-// import "./App.css";
 import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -103,7 +103,7 @@ const ExpenseForm = (props: ExpenseFormProps) => {
             className="input-field"
             type="number"
             {...register("amount", {
-              min: { value: 0, message: "Expense can not be negative" },
+              min: { value: 10, message: "Minimum expense should be 10" },
             })}
             value={expense.amount}
             onChange={handleChange}

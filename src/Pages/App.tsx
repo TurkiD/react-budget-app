@@ -1,13 +1,12 @@
+import { Flex, Text, Button } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+
+import "/src/index.css";
 import IncomeForm from "../component/IncomeForm";
 import ExpenseForm from "../component/ExpenseForm";
 import TargetForSaving from "../component/TargetForSaving";
 import TransferForSaving from "../component/TransferForSaving";
-
-import { Flex, Text, Button } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
-import "/src/index.css";
-
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function App() {
   const [savingAmount, setSavingAmount] = useState(0);
@@ -16,21 +15,33 @@ export default function App() {
   const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
 
   // State lifting here
-  const getSavingAmount = (amount: number) => {
-    setSavingAmount(amount);
-  };
+  const getSavingAmount = useCallback( 
+    (amount: number) => {
+      setSavingAmount(amount);
+    },
+    []
+  )
 
-  const getTotalSaving = (amount: number) => {
-    setSaving(amount);
-  };
+  const getTotalSaving = useCallback(
+    (amount: number) => {
+      setSaving(amount);
+    },
+    [],
+  )
 
-  const getTotalIncomeAmount = (amount: number) => {
-    setTotalIncomeAmount(amount);
-  };
+  const getTotalIncomeAmount = useCallback(
+    (amount: number) => {
+      setTotalIncomeAmount(amount);
+    },
+    [],
+  )
 
-  const getTotalExpenseAmount = (amount: number) => {
-    setTotalExpenseAmount(amount);
-  };
+  const getTotalExpenseAmount = useCallback(
+    (amount: number) => {
+      setTotalExpenseAmount(amount);
+    },
+    [],
+  )
 
   return (
     <>
