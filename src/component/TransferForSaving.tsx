@@ -51,7 +51,7 @@ function TransferForSaving(props: AmountSavingProps) {
             type="number"
             {...register("amount", {
               required: true,
-              min: { value: 1, message: "Minimum transfer value is 10" },
+              min: { value: 1, message: "Minimum transfer value is 1" },
             })}
             value={amount}
             onChange={handleChange}
