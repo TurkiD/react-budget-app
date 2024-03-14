@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, memo, useEffect, useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 import { ScrollArea, Flex, Text, Button, Box } from "@radix-ui/themes";
@@ -16,6 +16,7 @@ type ExpenseFormProps = {
 };
 
 const ExpenseForm = (props: ExpenseFormProps) => {
+  
   // use state
   const [expense, setExpense] = useState({
     source: "",
@@ -146,4 +147,4 @@ const ExpenseForm = (props: ExpenseFormProps) => {
   );
 };
 
-export default ExpenseForm;
+export default memo(ExpenseForm);

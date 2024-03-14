@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, memo, useState } from "react";
 
 import { Flex, Text, Button } from "@radix-ui/themes";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -40,7 +40,7 @@ function TransferForSaving(props: AmountSavingProps) {
   return (
     <div className="card">
       <p>
-        Current balance:{" "}
+        Current balance:{""}
         {props.totalIncomeAmount - props.totalExpenseAmount - props.saving}
       </p>
       <form onSubmit={handleSubmit(submittedData)}>
@@ -71,4 +71,4 @@ function TransferForSaving(props: AmountSavingProps) {
   );
 }
 
-export default TransferForSaving;
+export default memo(TransferForSaving);

@@ -19,28 +19,28 @@ export default function App() {
     (amount: number) => {
       setSavingAmount(amount);
     },
-    []
+    [savingAmount]
   )
 
   const getTotalSaving = useCallback(
     (amount: number) => {
       setSaving(amount);
     },
-    [],
+    [saving],
   )
 
   const getTotalIncomeAmount = useCallback(
     (amount: number) => {
       setTotalIncomeAmount(amount);
     },
-    [],
+    [totalIncomeAmount],
   )
 
   const getTotalExpenseAmount = useCallback(
     (amount: number) => {
       setTotalExpenseAmount(amount);
     },
-    [],
+    [totalExpenseAmount],
   )
 
   return (
